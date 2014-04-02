@@ -17,6 +17,13 @@ var width = 960,
 var projection = d3.geo.mercator()
     .rotate([-180,0]);
 
+var countryNameById = d3.map();
+d3.tsv("countries.tsv", function(error, data) {
+  data.forEach(function(d) {
+    countryNameById.set(d.id, d.name);
+  });
+});
+
 var svg = d3.select("body").append("svg")
     .attr("width", width)
     .attr("height", height);
@@ -33,9 +40,12 @@ d3.json("world-110m2.json", function(error, topology) {
           .features)
     .enter()
       .append("path")
+      .each(function(d) { console.log(countryNameById.get(d.id)); })
       .attr("d", path)
 });
 
 </script>
+
+<input type="search" id="hashtag-input" placeholder="Enter hashtag here">
 </body>
 </html>
