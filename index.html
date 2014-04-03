@@ -30,7 +30,9 @@ var quantize = d3.scale.quantize()
     .range(d3.range(9).map(function(i) { return "q" + i + "-9"; }));
 
 var projection = d3.geo.mercator()
-    .rotate([-180,0]);
+    .scale((width + 1) / 2 / Math.PI)
+    .translate([width / 2, height / 2])
+    .precision(.1);
 
 var countryNameById = d3.map();
 d3.tsv("countries.tsv", function(error, data) {
