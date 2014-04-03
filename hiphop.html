@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<link href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet">
+<style>
+path {
+  stroke: white;
+  stroke-width: 0.25px;
+  fill: grey;
+}
+
+.q0-9 { fill:rgb(255,219,176); }
+.q1-9 { fill:rgb(255,196,125); }
+.q2-9 { fill:rgb(249,163,50); }
+.q3-9 { fill:rgb(247,147,30); }
+.q4-9 { fill:rgb(239,112,48); }
+.q5-9 { fill:rgb(237,92,20); }
+.q6-9 { fill:rgb(234,64,31); }
+.q7-9 { fill:rgb(198,50,16); }
+.q8-9 { fill:rgb(183,27,15); }
+
+.btn-group{
+  padding: 10px 0;
+}
+</style>
+<body>
+  <div>
+    <div class="text-center">
+<div class="btn-group">
+  <button type="button" class="btn btn-default active" onclick="location.href='./index.html'">HipHop</button>
+  <button type="button" class="btn btn-default" onclick="location.href='./rock.html'">Rock</button>
+  <button type="button" class="btn btn-default" onclick="location.href='./electronic.html'">Electronic</button>
+  <button type="button" class="btn btn-default" onclick="location.href='./rap.html'">Rap</button>
+  <button type="button" class="btn btn-default" onclick="location.href='./country.html'">Country</button>
+  <button type="button" class="btn btn-default" onclick="location.href='./pop.html'">Pop</button>
+</div>
+</div>
+<script src="d3.v3.min.js"></script>
+<script src="queue.v1.min.js"></script>
+<script src="topojson.min.js"></script>
+<script>
+var width = 1000,
+    height = 500;
+    
+var quantize = d3.scale.quantize()
+    .domain([0, .1])
+    .range(d3.range(9).map(function(i) { return "q" + i + "-9"; }));
+
+var projection = d3.geo.mercator()
+    .scale((width + 1) / 2 / Math.PI)
+    .translate([width / 2, height / 2])
+    .precision(.1);
+
+var countryNameById = d3.map();
+d3.tsv("countries.tsv", function(error, data) {
+  data.forEach(function(d) {
+    countryNameById.set(d.id, d.name);
+  });
+});
+
+var svg = d3.select("body").append("svg")
+    .attr("width", width)
+    .attr("height", height);
+
+var path = d3.geo.path()
+    .projection(projection);
+
+var g = svg.append("g");
+
+
+queue()
+    .defer(d3.json, "world-110m2.json")
+    .defer(d3.tsv, "countries.tsv", function(d) { countryNameById.set(d.id, d.name); })
+    .defer(d3.json, "hiphop.json")
+    .await(ready);
+
+// load and display the World
+function ready(error, topology, bad, output) {
+  g.selectAll("path")
+    .data(topojson.feature(topology, topology.objects.countries)
+        .features)
+  .enter()
+    .append("path")
+    .attr("class", function(d) {
+      var cname = countryNameById.get(d.id);
+      if (output[cname] != undefined) {
+        return quantize(parseFloat(output[cname]));
+      }
+      return "q0-9";
+    })
+    .attr("d", path)
+};
+
+</script>
+</body>
+</html>
