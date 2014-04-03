@@ -26,7 +26,7 @@ path {
   <div>
     <div class="text-center">
 <div class="btn-group">
-  <button type="button" class="btn btn-default active" onclick="location.href='/hiphop.html'">HipHop</button>
+  <button type="button" class="btn btn-default active" onclick="location.href='/index.html'">HipHop</button>
   <button type="button" class="btn btn-default" onclick="location.href='/rock.html'">Rock</button>
   <button type="button" class="btn btn-default" onclick="location.href='/electronic.html'">Electronic</button>
   <button type="button" class="btn btn-default" onclick="location.href='/rap.html'">Rap</button>
@@ -69,7 +69,7 @@ var g = svg.append("g");
 queue()
     .defer(d3.json, "world-110m2.json")
     .defer(d3.tsv, "countries.tsv", function(d) { countryNameById.set(d.id, d.name); })
-    .defer(d3.json, "electronic.json")
+    .defer(d3.json, "hiphop.json")
     .await(ready);
 
 // load and display the World
