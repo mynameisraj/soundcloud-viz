@@ -1,3 +1,6 @@
-Raj: worked on the front end. Built out d3 visualization and figured out
+Raj: Worked on the front end. Built out d3 visualization and figured out
 data format.
-Kavya: worked on formatting country list (.json/tsv)
+Mayank: Worked on front end with Raj.
+Kavya: Worked on formatting country list (.json/tsv)
+Lisa: Designed the color scheme for the visualization.
+Derek: Worked on the back end. Created additional pages for each genre.
