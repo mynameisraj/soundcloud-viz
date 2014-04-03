@@ -8,22 +8,27 @@ path {
   fill: grey;
 }
 
-.q0-9 { fill:rgb(255,219,176); }
-.q1-9 { fill:rgb(255,196,125); }
-.q2-9 { fill:rgb(249,163,50); }
-.q3-9 { fill:rgb(247,147,30); }
-.q4-9 { fill:rgb(239,112,48); }
-.q5-9 { fill:rgb(237,92,20); }
-.q6-9 { fill:rgb(234,64,31); }
-.q7-9 { fill:rgb(198,50,16); }
-.q8-9 { fill:rgb(183,27,15); }
+.q0-9 { fill:rgb(247,251,255); }
+.q1-9 { fill:rgb(222,235,247); }
+.q2-9 { fill:rgb(198,219,239); }
+.q3-9 { fill:rgb(158,202,225); }
+.q4-9 { fill:rgb(107,174,214); }
+.q5-9 { fill:rgb(66,146,198); }
+.q6-9 { fill:rgb(33,113,181); }
+.q7-9 { fill:rgb(8,81,156); }
+.q8-9 { fill:rgb(8,48,107); }
+
+.btn-group{
+  padding: 10px 0;
+}
 </style>
 <body>
   <div>
+    <div class="text-center">
 <div class="btn-group">
-  <button type="button" class="btn btn-default" href="hiphop.html">HipHop</button>
-  <button type="button" class="btn btn-default">Middle</button>
-  <button type="button" class="btn btn-default">Right</button>
+  <button type="button" class="btn btn-default active" onclick="location.href='/hiphop.html'">HipHop</button>
+  <button type="button" class="btn btn-default" onclick="location.href='/pop.html'">Pop</button>
+  <button type="button" class="btn btn-default" onclick="location.href='/electronic.html'">Electronic</button>
 </div>
 </div>
 <script src="d3.v3.min.js"></script>
