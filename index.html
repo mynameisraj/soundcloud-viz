@@ -22,11 +22,11 @@ path {
 <script src="queue.v1.min.js"></script>
 <script src="topojson.min.js"></script>
 <script>
-var width = 960,
+var width = 1000,
     height = 500;
     
 var quantize = d3.scale.quantize()
-    .domain([0, 1])
+    .domain([0, .1])
     .range(d3.range(9).map(function(i) { return "q" + i + "-9"; }));
 
 var projection = d3.geo.mercator()
@@ -52,7 +52,7 @@ var g = svg.append("g");
 queue()
     .defer(d3.json, "world-110m2.json")
     .defer(d3.tsv, "countries.tsv", function(d) { countryNameById.set(d.id, d.name); })
-    .defer(d3.json, "test.json")
+    .defer(d3.json, "electronic.json")
     .await(ready);
 
 // load and display the World
