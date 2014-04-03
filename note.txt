@@ -1,2 +1,3 @@
 Raj: worked on the front end. Built out d3 visualization and figured out
 data format.
+Kavya: worked on formatting country list (.json/tsv)
